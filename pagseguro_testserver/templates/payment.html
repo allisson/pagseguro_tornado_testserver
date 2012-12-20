@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmar Pagamento{% end %}
+
+{% block container %}
+
+<div class="row">
+  <div class="twelve columns">  
+    <h4>Simular Pagamento</h4>
+    <hr />
+
+    <h6>Dados do Pagamento</h6>
+    <table class="twelve">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for k,v in data.iteritems() %}
+        <tr>
+          <td>{{ k }}</td>
+          <td>{{ v }}</td>
+        </tr>
+        {% end %}
+      </tbody>
+    </table>
+
+    <form action="{{ return_url }}" method="post" class="custom">
+
+      {% for k,v in data.iteritems() %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}">
+      {% end %}
+      <p>
+        <label>Tipo de Pagamento</label>
+        <select name="TipoPagamento" id="id_TipoPagamento">
+          <option value="Pagamento" selected="selected">Pagamento</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Oi Paggo">Oi Paggo</option>
+          <option value="Boleto">Boleto</option>
+          <option value="Pagamento Online">Pagamento Online</option>
+        </select>
+      </p>
+      <p>
+        <label>Status da Transação</label>
+        <select name="StatusTransacao" id="id_StatusTransacao">
+          <option value="Completo">Completo</option>
+          <option value="Aguardando Pagto">Aguardando Pagto</option>
+          <option value="Aprovado" selected="selected">Aprovado</option>
+          <option value="Em Análise">Em Análise</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </p>
+      <button type="submit" class="button">Enviar</button>
+    </form>
+
+  </div>
+
+</div>
+{% end %}
